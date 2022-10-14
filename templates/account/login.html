@@ -8,7 +8,7 @@
 
 {% block content %}
     <form action="" method="POST">
-
+        {% csrf_token %}
         {{ form|crispy }}
         <input type="submit" value="Login">
 
