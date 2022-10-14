@@ -9,6 +9,15 @@
     
 </head>
 <body>
+    {% if user.is_authenticated %}
+    
+        {{ user.email }}
+
+    {% else %}
+
+        <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Signup</a>
+    {% endif %}
+
     {% block content %}
     
     {% endblock content %}
