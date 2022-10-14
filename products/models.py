@@ -1,11 +1,20 @@
 from django.db import models
+from django.shortcuts import reverse
+
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2, max_digits=5)
+    price = models.DecimalField(decimal_places=2, max_digits=7)
     status = models.BooleanField(default=True)
-    cover = models.ImageField()
+    cover = models.ImageField(blank=True)
+    slug = models.SlugField(blank=True, unique=True)
 
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"slug": self.slug})
