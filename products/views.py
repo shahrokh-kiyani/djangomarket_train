@@ -1,8 +1,8 @@
 from django.views import generic
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
-from .models import Product
-from .forms import CommnetForm
+from .models import Product, Comment
+from .forms import CommentForm
 
 
 class ProductListView(generic.ListView):
@@ -10,13 +10,25 @@ class ProductListView(generic.ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'
 
+def detail_view(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    comments = product.comments.filter(active=True)
 
-class ProductDetailView(generic.DetailView):
-    queryset = Product.objects.all()
-    template_name = 'products/product_detail.html'
-    context_object_name = 'product'
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comment_form'] = CommnetForm()
-        return context
+        new_comment = comment_form.save(commit=False)
+        new_comment.author = request.user
+        new_comment.product = product
+        new_comment.save()
+
+    else :
+        comment_form = CommentForm
+
+    context = {
+        'product': product,
+        'comment': comments,
+        'form': comment_form,
+    }
+
+    return render(request, 'products/product_detail.html', context)

@@ -35,3 +35,7 @@ class Comment(models.Model):
     stars = models.CharField(choices=PRODUCT_STARS, max_length=10)
     active = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"slug": self.product.slug})
+    

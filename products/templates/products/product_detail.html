@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load crispy_forms_filters %}
 
 {% load crispy_forms_tags static %}
  
@@ -31,7 +32,7 @@
                 <div class="container">
                     <div class="row no-gutters mb--80">
                         <div class="col-12 col-sm-4 product-main-image d-flex align-content-center">
-                            <img class="m-auto" style="max-height: 400px;" src="https://dkstatics-public.digikala.com/digikala-products/8f34ee9823202d09ee97deb9b1c8e3300a9a24d8_1643265727.jpg?x-oss-process=image/resize,w_1600/quality,q_80" alt="">
+                            <img class="m-auto" style="max-height: 400px;" src="{{ product.cover.url }}" alt="">
                         </div>
                         <div class="col-12 col-sm-8 product-main-details mt-md--50">
                             <div class="product-summary pl-lg--30 pl-md--0 text-right p-4">
@@ -153,10 +154,10 @@
                                                     <div class="col-lg-8 m-auto">
                                                         <span class="reply-title pull-right">نظر خود را بنویسید</span>
                                                         <br>
-                                                        <form action="" method="post">
+                                                        <form action="" method="POST">
                                                             {% csrf_token %}
-                                                            {{ comment_form|crispy }}
-                                                            <input type="submit", value="Send">
+                                                            {{ form|crispy }}
+                                                            <input type="submit" value="Send">
                                                         </form>
 {#                                                        <form action="#" class="form text-right">#}
 {#                                                            <div class="form-notes mb--20">#}
