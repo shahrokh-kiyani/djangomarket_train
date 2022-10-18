@@ -10,8 +10,9 @@ class ProductListView(generic.ListView):
     template_name = 'products/product_list.html'
     context_object_name = 'products'
 
+
 def detail_view(request, slug):
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product, slug=slug, status=True)
     comments = product.comments.filter(active=True)
 
     if request.method == "POST":
@@ -22,7 +23,7 @@ def detail_view(request, slug):
         new_comment.product = product
         new_comment.save()
 
-    else :
+    else:
         comment_form = CommentForm
 
     context = {
