@@ -9,7 +9,6 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=7)
     status = models.BooleanField(default=True)
     cover = models.ImageField(blank=True)
-    slug = models.SlugField(blank=True, unique=True)
 
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)

@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 
 from .models import Product, Comment
 from .forms import CommentForm
+from cart.forms import AddToCartForm
 
 
 class ProductListView(generic.ListView):
@@ -11,8 +12,8 @@ class ProductListView(generic.ListView):
     context_object_name = 'products'
 
 
-def detail_view(request, slug):
-    product = get_object_or_404(Product, slug=slug, status=True)
+def detail_view(request, pk):
+    product = get_object_or_404(Product, pk=pk, status=True)
     comments = product.comments.filter(active=True)
 
     if request.method == "POST":
@@ -30,6 +31,7 @@ def detail_view(request, slug):
         'product': product,
         'comment': comments,
         'form': comment_form,
+        'add_to_cart_form': AddToCartForm(),
     }
 
     return render(request, 'products/product_detail.html', context)
