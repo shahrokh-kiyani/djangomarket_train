@@ -17,7 +17,7 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"slug": self.slug})
+        return reverse("detail", args=[self.pk])
 
 
 class Comment(models.Model):
@@ -36,5 +36,5 @@ class Comment(models.Model):
     time = models.DateTimeField(auto_now_add=True, null=True)
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"slug": self.product.slug})
+        return reverse("detail", args=[self.pk])
     

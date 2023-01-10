@@ -1,5 +1,8 @@
 {% extends '_base.html' %}
 
+{% load static %}
+{% load crispy_forms_tags %}
+
 {% block title %}
     Cart Page
 {% endblock title %}
@@ -43,28 +46,28 @@
                                                     <tbody>
                                                         {% for item in cart %}
                                                             <tr>
-                                                                <td class="product-remove text-left"><a href=""><i class="flaticon flaticon-cross"></i></a></td>
+                                                                <td class="product-remove text-left"><a href="{% url 'cart_remove' item.product_obj.id %}"><i class="flaticon flaticon-cross"></i></a></td>
                                                                 <td class="product-thumbnail text-left">
                                                                     <img src="assets/img/products/prod-10-70x88.jpg" alt="Product Thumnail">
                                                                 </td>
                                                                 <td class="product-name wide-column">
                                                                     <h3>
-                                                                        <a href="product-details.html">{{ item.product_obj.title }}</a>
+                                                                        <a href="{{ item.product_obj.get_absolute_url }}">{{ item.product_obj.title }}</a>
                                                                     </h3>
                                                                 </td>
                                                                 <td class="product-price">
                                                                     <span class="product-price-wrapper">
-                                                                        <span class="money">۱۴۸,۰۰۰ تومان</span>
+                                                                        <span class="money">{{ item.product_obj.price }}</span>
                                                                     </span>
                                                                 </td>
                                                                 <td class="product-quantity">
                                                                     <div class="quantity">
-                                                                        <input type="number" class="quantity-input" name="qty" id="qty-1" value="2" min="1">
+                                                                        <input type="number" class="quantity-input" name="qty" id="qty-1" value="{{ item.quantity }}" min="1">
                                                                     </div>
                                                                 </td>
                                                                 <td class="product-total-price">
                                                                     <span class="product-price-wrapper">
-                                                                        <span class="money">۲۹۶,۰۰۰ تومان</span>
+                                                                        <span class="money"></span>
                                                                     </span>
                                                                 </td>
                                                             </tr>
