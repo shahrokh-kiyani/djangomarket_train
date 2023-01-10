@@ -76,9 +76,9 @@
                                 </a>
                             </li>
                             <li class="header-toolbar__item mini-cart-item">
-                                <a href="#miniCart" class="header-toolbar__btn toolbar-btn mini-cart-btn">
+                                <a href="{% url 'cart' %}" class="header-toolbar__btn toolbar-btn mini-cart-btn">
                                     <i class="flaticon flaticon-shopping-cart"></i>
-                                    <sup class="mini-cart-count">2</sup>
+                                    {% comment %} <sup class="mini-cart-count">2</sup> {% endcomment %}
                                 </a>
                             </li>
                             <li class="header-toolbar__item user-info">
@@ -130,26 +130,6 @@
     {% block content %}
 
     {% endblock content %}
-
-    <!-- Footer Start-->
-    <footer class="footer">
-        <div class="footer-top bg-color ptb--50" data-bg-color="#f6f6f6">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-9 text-center">
-                        <div class="footer-widget mb--50 pb--1">
-                            <ul class="footer-menu">
-                                <li><a href="">درباره ما</a></li>
-                                <li><a href="">قوانین و مقررات</a></li>
-                                <li><a href="">تماس با ما</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer End-->
 
 </body>
 </html>
